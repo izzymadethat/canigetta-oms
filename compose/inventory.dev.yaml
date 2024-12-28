@@ -1,19 +1,21 @@
 services:
   inventory:
     build:
-      context: .
+      context: ..
       dockerfile: ./inventory/Dockerfile.inventory.dev
+    container_name: inventory-service
     ports:
       - 4545:4545
     volumes:
-      - ./inventory:/app/inventory
+      - ../inventory:/app/inventory
     depends_on:
       - inventory-db
     environment:
-      - MONGO_URL=mongodb://inventory-db:27017/inventory
+      - INVENTORY_MONGO_URL=mongodb://inventory-db:27017/inventory
 
   inventory-db:
     image: mongo:latest
+    container_name: inventory-db
     ports:
       - 27017:27017
     volumes:

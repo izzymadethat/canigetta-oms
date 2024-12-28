@@ -1,0 +1,4 @@
+name: canigetta-oms
+include:
+  - inventory.dev.yaml
+  - customers.dev.yaml

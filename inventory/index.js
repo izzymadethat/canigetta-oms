@@ -3,7 +3,7 @@ const app = require("./inventory");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.INVENTORY_MONGO_URL)
   .then(() => {
     console.log("Inventory services connected to MongoDB");
     app.listen(4545, () => {
