@@ -1,0 +1,25 @@
+# Dockerfile builds from context of root directory
+# Project structure in container will be replicated as such
+FROM node:18.20.4-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install pnpm globally
+RUN npm install -g pnpm@9.15.0
+
+# Copy root level package.json and pnpm-lock.yaml
+COPY pnpm-lock.yaml package.json ./
+
+# Install dependencies for the whole workspace
+RUN npm install -g pnpm@9.15.0 && pnpm install --frozen-lockfile
+
+# Copy the inventory service code
+COPY . .
+
+
+# Expose the port for the inventory service
+EXPOSE 4545
+
+# Run the dev server with nodemon
+CMD ["pnpm","--filter", "inventory", "dev"]
