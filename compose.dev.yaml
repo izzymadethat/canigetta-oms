@@ -9,6 +9,8 @@ services:
       - ./inventory:/app/inventory
     depends_on:
       - inventory-db
+    environment:
+      - MONGO_URL=mongodb://inventory-db:27017/inventory
 
   inventory-db:
     image: mongo:latest
