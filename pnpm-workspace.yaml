@@ -1,0 +1,6 @@
+packages:
+  - "common"
+  - "inventory"
+  - "orders"
+  - "payments"
+  - "users"
