@@ -1,0 +1,15 @@
+FROM node:18.20.4-slim
+
+WORKDIR /app
+
+COPY pnpm-lock.yaml package.json ./
+
+RUN npm install -g pnpm@9.15.0 && pnpm install --frozen-lockfile
+
+COPY . .
+
+EXPOSE 7777
+
+WORKDIR /app/orders
+
+CMD ["pnpm", "dev"]

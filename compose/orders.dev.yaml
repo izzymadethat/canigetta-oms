@@ -1,0 +1,24 @@
+services:
+  orders:
+    container_name: orders-service
+    build:
+      context: ..
+      dockerfile: ./orders/Dockerfile.orders.dev
+    ports:
+      - 7777:7777
+    environment:
+      - ORDERS_MONGO_URL=mongodb://orders-db:27017/orders
+    depends_on:
+      - orders-db
+    volumes:
+      - ../orders/:/app/orders
+  orders-db:
+    container_name: orders-db
+    image: mongo:latest
+    ports:
+      - 27019:27017
+    volumes:
+      - orders_data:/data/db
+
+volumes:
+  orders_data:
