@@ -1,33 +1,28 @@
 const mongoose = require("mongoose");
 
-const Burger = mongoose.model("Burger", {
-  name: {
-    type: String,
-    required: true,
-    trim: true,
+const burgerSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true,
+      min: 0
+    },
+    ingredients: {
+      type: [String],
+      required: true
+    },
+    isVegetarian: {
+      type: Boolean,
+      default: false
+    }
   },
-  price: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
-  ingredients: {
-    type: [String],
-    required: true,
-  },
-  isVegetarian: {
-    type: Boolean,
-    default: false,
-  },
-  calories: {
-    type: Number,
-    required: true,
-    min: 0,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true } // Include timestamps in the schema options
+);
+
+const Burger = mongoose.model("Burger", burgerSchema); // No third argument needed
 
 module.exports = Burger;

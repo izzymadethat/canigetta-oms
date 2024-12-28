@@ -6,6 +6,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start:dev": "docker compose -f compose.dev.yaml up -d --build"
+  },
   "engines": {
     "node": "18.x",
     "pnpm": "9.15.0"
