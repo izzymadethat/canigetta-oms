@@ -8,6 +8,22 @@ importers:
 
   .: {}
 
+  customers:
+    dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      mongoose:
+        specifier: ^8.9.2
+        version: 8.9.2
+    devDependencies:
+      nodemon:
+        specifier: ^3.1.9
+        version: 3.1.9
+
   inventory:
     dependencies:
       dotenv:

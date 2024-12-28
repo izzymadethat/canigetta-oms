@@ -7,7 +7,8 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start:dev": "docker compose -f compose.dev.yaml up -d --build"
+    "start:dev": "docker compose -f compose/compose.dev.yaml up -d --build",
+    "stop": "docker compose -f compose/compose.dev.yaml down"
   },
   "engines": {
     "node": "18.x",

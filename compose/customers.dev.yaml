@@ -1,0 +1,25 @@
+services:
+  customers:
+    container_name: customers-service
+    build:
+      context: ..
+      dockerfile: ./customers/Dockerfile.customers.dev
+    ports:
+      - 5555:5555
+    volumes:
+      - ../customers:/app/customers
+    depends_on:
+      - customers-db
+    environment:
+      - CUSTOMERS_MONGO_URL=mongodb://customers-db:27017/customers
+  
+  customers-db:
+    image: mongo:latest
+    container_name: customers-db
+    ports:
+      - 27018:27017
+    volumes:
+      - customers_data:/data/db
+
+volumes:
+  customers_data:
