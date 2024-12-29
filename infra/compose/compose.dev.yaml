@@ -1,0 +1,22 @@
+name: canigetta-oms
+services:
+  nginx:
+    container_name: ngnix-proxy
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ../nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - orders
+      - inventory
+      - customers
+    networks:
+      - canigetta_network
+networks:
+  canigetta_network:
+    driver: bridge
+include:
+  - inventory.dev.yaml
+  - customers.dev.yaml
+  - orders.dev.yaml

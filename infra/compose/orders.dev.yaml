@@ -2,7 +2,7 @@ services:
   orders:
     container_name: orders-service
     build:
-      context: ..
+      context: ../../
       dockerfile: ./orders/Dockerfile.orders.dev
     ports:
       - 7777:7777
@@ -11,7 +11,7 @@ services:
     depends_on:
       - orders-db
     volumes:
-      - ../orders/:/app/orders
+      - ../../orders/:/app/orders
     networks:
       - canigetta_network
   orders-db:

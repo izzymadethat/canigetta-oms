@@ -2,12 +2,12 @@ services:
   customers:
     container_name: customers-service
     build:
-      context: ..
+      context: ../../
       dockerfile: ./customers/Dockerfile.customers.dev
     ports:
       - 5555:5555
     volumes:
-      - ../customers:/app/customers
+      - ../../customers:/app/customers
     depends_on:
       - customers-db
     environment:

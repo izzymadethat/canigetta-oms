@@ -1,8 +1,0 @@
-name: canigetta-oms
-networks:
-  canigetta_network:
-    driver: bridge
-include:
-  - inventory.dev.yaml
-  - customers.dev.yaml
-  - orders.dev.yaml
