@@ -12,6 +12,8 @@ services:
       - orders-db
     volumes:
       - ../orders/:/app/orders
+    networks:
+      - canigetta_network
   orders-db:
     container_name: orders-db
     image: mongo:latest
@@ -19,6 +21,8 @@ services:
       - 27019:27017
     volumes:
       - orders_data:/data/db
+    networks:
+      - canigetta_network
 
 volumes:
   orders_data:

@@ -12,6 +12,8 @@ services:
       - inventory-db
     environment:
       - INVENTORY_MONGO_URL=mongodb://inventory-db:27017/inventory
+    networks:
+      - canigetta_network
 
   inventory-db:
     image: mongo:latest
@@ -20,6 +22,8 @@ services:
       - 27017:27017
     volumes:
       - inventory_data:/data/db
+    networks:
+      - canigetta_network
 
 volumes:
   inventory_data:

@@ -13,19 +13,7 @@ const orderSchema = new mongoose.Schema({
     require: true
   },
   items: [
-    {
-      itemId: mongoose.Schema.Types.ObjectId,
-      itemType: {
-        type: String,
-        require: true
-      },
-      quantity: {
-        type: Number,
-        require: true,
-        default: 1,
-        min: 1
-      }
-    }
+    { _id: { type: mongoose.Schema.Types.ObjectId }, type: { type: String } }
   ],
   orderDate: {
     type: Date,

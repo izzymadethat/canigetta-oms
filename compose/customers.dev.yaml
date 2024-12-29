@@ -12,6 +12,8 @@ services:
       - customers-db
     environment:
       - CUSTOMERS_MONGO_URL=mongodb://customers-db:27017/customers
+    networks:
+      - canigetta_network
   
   customers-db:
     image: mongo:latest
@@ -20,6 +22,8 @@ services:
       - 27018:27017
     volumes:
       - customers_data:/data/db
+    networks:
+      - canigetta_network
 
 volumes:
   customers_data:

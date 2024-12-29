@@ -11,6 +11,11 @@ const burgerSchema = new mongoose.Schema(
       required: true,
       min: 0
     },
+    quantity: {
+      type: Number,
+      default: 1,
+      min: 1
+    },
     ingredients: {
       type: [String],
       required: true

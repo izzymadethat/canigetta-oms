@@ -7,7 +7,8 @@ router.post("/burgers", async (req, res) => {
     name: req.body.name,
     price: req.body.price,
     ingredients: req.body.ingredients,
-    isVegetarian: req.body.isVegetarian || false
+    isVegetarian: req.body.isVegetarian || false,
+    quantity: req.body.quantity || 1
   };
 
   // Create a new burger and save it to the database
