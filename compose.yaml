@@ -1,5 +1,7 @@
 services:
+  # Customers service
   customers:
+    container_name: customers-service
     build:
       context: .
       args:
@@ -16,7 +18,9 @@ services:
     networks:
       - canigetta-network
 
+  # ==== Customers db ====
   mongo-customers:
+    container_name: customers-db
     image: mongo:latest
     ports:
       - 27017:27017
@@ -24,9 +28,70 @@ services:
       - mongo-customers-data:/data/db
     networks:
       - canigetta-network
+
+  # ================================
+  # Inventory service
+  inventory:
+    container_name: inventory-service
+    build:
+      context: .
+      args:
+        - SERVICE_PATH=inventory
+        - PACKAGE_NAME=inventory
+        - PNPM_VERSION=9.15.0
+    ports:
+      - 4545:4545
+    environment:
+      - NODE_ENV=production
+      - INVENTORY_MONGO_URL=mongodb://mongo-inventory:27017/inventory
+    networks:
+      - canigetta-network
+
+  # ==== Inventory db ====
+  mongo-inventory:
+    container_name: inventory-db
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    volumes:
+      - mongo-inventory-data:/data/db
+    networks:
+      - canigetta-network
+
+  # ================================
+  # Orders service
+  orders:
+    container_name: orders-service
+    build:
+      context: .
+      args:
+        - SERVICE_PATH=orders
+        - PACKAGE_NAME=orders
+        - PNPM_VERSION=9.15.0
+    ports:
+      - 7777:7777
+    environment:
+      - NODE_ENV=production
+      - ORDERS_MONGO_URL=mongodb://mongo-orders:27017/orders
+    networks:
+      - canigetta-network
+
+  # ==== Orders db ====
+  mongo-orders:
+    container_name: orders-db
+    image: mongo:latest
+    ports:
+      - 27019:27017
+    volumes:
+      - mongo-orders-data:/data/db
+    networks:
+      - canigetta-network
+
 networks:
   canigetta-network:
     driver: bridge
 
 volumes:
   mongo-customers-data:
+  mongo-inventory-data:
+  mongo-orders-data:
