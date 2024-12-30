@@ -1,0 +1,32 @@
+services:
+  customers:
+    build:
+      context: .
+      args:
+        - SERVICE_PATH=customers
+        - PACKAGE_NAME=customers
+        - PNPM_VERSION=9.15.0
+    ports:
+      - 5555:5555
+    environment:
+      - NODE_ENV=production
+      - CUSTOMERS_MONGO_URL=mongodb://mongo-customers:27017/customers
+    depends_on:
+      - mongo-customers
+    networks:
+      - canigetta-network
+
+  mongo-customers:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-customers-data:/data/db
+    networks:
+      - canigetta-network
+networks:
+  canigetta-network:
+    driver: bridge
+
+volumes:
+  mongo-customers-data:

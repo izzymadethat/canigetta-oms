@@ -3,4 +3,4 @@ packages:
   - "inventory"
   - "orders"
   - "payments"
-  - "users"
+  - "customers"
