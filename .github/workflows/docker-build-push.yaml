@@ -1,0 +1,38 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and Push Customers Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/canigetta-customers:latest --build-arg SERVICE_PATH=customers \
+          --build-arg PACKAGE_NAME=customers --build-arg PNPM_VERSION=9.15.0 \
+          -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/canigetta-customers:latest
+      - name: Build and Push Inventory Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/canigetta-inventory:latest --build-arg SERVICE_PATH=inventory \
+          --build-arg PACKAGE_NAME=inventory --build-arg PNPM_VERSION=9.15.0 \
+          -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/canigetta-inventory:latest
+      - name: Build and Push Orders Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/canigetta-orders:latest --build-arg SERVICE_PATH=orders \
+          --build-arg PACKAGE_NAME=orders --build-arg PNPM_VERSION=9.15.0 \
+          -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/canigetta-orders:latest
